@@ -52,6 +52,10 @@ class TradeBotVWAP(TradeBot):
         :return: OrderType recommendation
         """
 
+        print("bickkkkkk")
+        print(ticker)
+
+
         if not ticker:
             print("ERROR: ticker cannot be a null value")
             return None

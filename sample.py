@@ -21,18 +21,21 @@ def main():
     tb0 = TradeBot(ROBINHOOD_USER, ROBINHOOD_PASS)
     tb1 = TradeBotSimpleMovingAverage(ROBINHOOD_USER, ROBINHOOD_PASS)
     tb2 = TradeBotVWAP(ROBINHOOD_USER, ROBINHOOD_PASS)
-    tb3 = TradeBotTwitterSentiments(ROBINHOOD_USER, ROBINHOOD_PASS)
+    # tb3 = TradeBotTwitterSentiments(ROBINHOOD_USER, ROBINHOOD_PASS)
 
     print(f"Current positions : {tb0.get_current_positions()}")
     print(f"Current cash position : ${tb0.get_current_cash_position()}")
 
     company_name = tb0.get_company_name_from_ticker(ticker)
     print(f"Market price of {company_name} is ${tb0.get_current_market_price(ticker)}")
+    print(f"Market price of {company_name} is ${tb0.get_stock_history_dataframe(ticker)}")
+
 
     # Order Recommendations from the bots
     print(f"SimpleMovingAverage : {tb1.make_order_recommendation(ticker)}")
     print(f"VWAP : {tb2.make_order_recommendation(ticker)}")
-    print(f"TwitterSentiments : {tb3.make_order_recommendation(ticker)}")
+    
+    # print(f"TwitterSentiments : {tb3.make_order_recommendation(ticker)}")
 
 if __name__ == "__main__":
     main()
