@@ -1,2 +1,2 @@
-web: python sample.py
-worker: python sample.py 
+web: python sample.py RIVN
+worker: python sample.py RIVN
