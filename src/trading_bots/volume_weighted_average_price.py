@@ -52,7 +52,6 @@ class TradeBotVWAP(TradeBot):
         :return: OrderType recommendation
         """
 
-        print("bickkkkkk")
         print(ticker)
 
 

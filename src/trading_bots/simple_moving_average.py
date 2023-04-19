@@ -53,7 +53,6 @@ class TradeBotSimpleMovingAverage(TradeBot):
         :param ticker: A company's ticker symbol as a string=
         :return: OrderType recommendation
         """
-        print("TICKKKK")
         print(ticker)
 
         if not ticker:

@@ -1,4 +1,5 @@
 # Robinhood Trading Bot
+
 A Python trading bot that uses Robinhood to execute market orders based on various trading algorithms.
 
 <h2> Algorithm Explanations </h2>
@@ -20,7 +21,6 @@ which details the negativity, neutrality, or positivity of the sentiment. The av
 order recommendation is made, if the sentiment is negative a sell order recommendation is made, and if the sentiment is neutral no order recommendation
 is made.
 
-
 <h2> Setting Up </h2>
 You will need to have a Robinhood account and a Twitter API key. Navigate to initialize.sh and populate the following:
 
@@ -35,7 +35,6 @@ After this is done, you can create a virtual environment, install dependencies, 
 
 We are now ready for usage!!
 
-
 <h2> Usage </h2>
 You can choose which algorithm you want to trade with. Then call the function
 
@@ -45,7 +44,7 @@ and your bot will trade ticker with the specified amount_in_dollars.
 
 If you want to create your own bot with your own algorithm, you simply need to navigate to new_bot_skeleton.py found in the trading_bots folder and add
 your own algorithm into:
-        
+
         make_order_recommendation(self, ticker):
 
 Add in whatever helper functions you may need. Make sure that the above function returns a value of type OrderType!
