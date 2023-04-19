@@ -2,7 +2,7 @@ import sys
 
 from src.trading_bots.base import TradeBot
 from src.trading_bots.utilities import ROBINHOOD_PASS
-from src.trading_bots.utilities import ROBINHOOD_USER
+from src.trading_bots.utilities import ROBINHOOD_USER, QR_CODE
 from src.trading_bots.simple_moving_average import TradeBotSimpleMovingAverage
 from src.trading_bots.volume_weighted_average_price import TradeBotVWAP
 from src.trading_bots.twitter_sentiments import TradeBotTwitterSentiments
@@ -18,9 +18,9 @@ def main():
     args = sys.argv[1:]
     ticker = args[0]
 
-    tb0 = TradeBot(ROBINHOOD_USER, ROBINHOOD_PASS)
-    tb1 = TradeBotSimpleMovingAverage(ROBINHOOD_USER, ROBINHOOD_PASS)
-    tb2 = TradeBotVWAP(ROBINHOOD_USER, ROBINHOOD_PASS)
+    tb0 = TradeBot(ROBINHOOD_USER, ROBINHOOD_PASS, QR_CODE)
+    tb1 = TradeBotSimpleMovingAverage(ROBINHOOD_USER, ROBINHOOD_PASS, QR_CODE)
+    tb2 = TradeBotVWAP(ROBINHOOD_USER, ROBINHOOD_PASS, QR_CODE)
     # tb3 = TradeBotTwitterSentiments(ROBINHOOD_USER, ROBINHOOD_PASS)
 
     print(f"Current positions : {tb0.get_current_positions()}")
