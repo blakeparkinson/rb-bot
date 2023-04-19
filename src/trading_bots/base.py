@@ -15,7 +15,7 @@ class TradeBot:
     def __init__(self, username, password, qr_code):
         """Logs user into their Robinhood account."""
         
-        robinhood.login(username, password, qr_code)
+        robinhood.login(username, password, mfa_code=qr_code)
 
     def robinhood_logout(self):
         """Logs user out of their Robinhood account."""
