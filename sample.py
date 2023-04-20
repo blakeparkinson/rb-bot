@@ -7,6 +7,7 @@ from src.trading_bots.simple_moving_average import TradeBotSimpleMovingAverage
 from src.trading_bots.volume_weighted_average_price import TradeBotVWAP
 from src.trading_bots.twitter_sentiments import TradeBotTwitterSentiments
 from src.trading_bots.base import OrderType
+import time
 
 tickers = ["AAPL", "MSFT", "AMZN", "GOOG", "GOOGL", "FB", "TSLA", "NVDA", "JPM", "JNJ", 
            "V", "PG", "MA", "UNH", "HD", "PYPL", "DIS", "BAC", "INTC", "ASML", 
@@ -31,13 +32,7 @@ tickers = ["AAPL", "MSFT", "AMZN", "GOOG", "GOOGL", "FB", "TSLA", "NVDA", "JPM",
 # Usage: python sample.py <company_ticker>
 
 def main():
-
-    if len(sys.argv) != 2:
-        raise Exception("Must run as python sample.py [company_ticker]")
         
-    args = sys.argv[1:]
-    ticker = args[0]
-
     tb0 = TradeBot(ROBINHOOD_USER, ROBINHOOD_PASS, QR_CODE)
     tb1 = TradeBotSimpleMovingAverage(ROBINHOOD_USER, ROBINHOOD_PASS, QR_CODE)
     tb2 = TradeBotVWAP(ROBINHOOD_USER, ROBINHOOD_PASS, QR_CODE)
@@ -63,7 +58,6 @@ def main():
 
 
     current_cash=tb0.get_current_cash_position()
-    print(f"Current cash: {current_cash}")
     if current_cash:
         for ticker in tickers:
             try:
@@ -76,6 +70,11 @@ def main():
                 print(f"Buying {ticker}")
                 tb0.place_buy_order(ticker, current_cash)
                 print (f"Bought {ticker} at ${tb0.get_current_market_price(ticker)}")
+                #we bought a stock, so we need to update our cash position and jump out of the loop
+                # break
+    
+    time.sleep(300)
+    main()
 
 
 
