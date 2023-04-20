@@ -40,8 +40,14 @@ def main():
 
     current_positions = tb0.get_current_positions()
 
-    keys = list(current_positions.keys())
+    # keys = list(current_positions.keys())
+    keys = ["RIVN"]
     for key in keys:
+        current_price= tb0.get_current_market_price(key)
+        print(f"Current price of {key} is ${current_price}")
+        history = tb0.get_stock_history_dataframe(key)
+        print("History: ", history)
+        
         rec1 = tb1.make_order_recommendation(key)
         rec2 = tb2.make_order_recommendation(key)
         if rec1 == OrderType.SELL_RECOMMENDATION and rec2 == OrderType.SELL_RECOMMENDATION:
@@ -56,7 +62,7 @@ def main():
     
     # print(f"TwitterSentiments : {tb3.make_order_recommendation(ticker)}")
 
-
+    return
     current_cash=tb0.get_current_cash_position()
     if current_cash:
         for ticker in tickers:
