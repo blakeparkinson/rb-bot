@@ -15,7 +15,7 @@ class TradeBot:
     def __init__(self, username, password, qr_code):
         """Logs user into their Robinhood account."""
         
-        robinhood.login(username, password, mfa_code=qr_code)
+        robinhood.login(username, password)
 
     def robinhood_logout(self):
         """Logs user out of their Robinhood account."""
@@ -170,6 +170,7 @@ class TradeBot:
         return purchase_data
 
     def place_sell_order(self, ticker, amount_in_dollars):
+
         """
         Places a sell order for ticker with a specified amount.
 
