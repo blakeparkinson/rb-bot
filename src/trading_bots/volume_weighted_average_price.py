@@ -6,7 +6,7 @@ from src.trading_bots.base import OrderType, TradeBot
 class TradeBotVWAP(TradeBot):
     def __init__(self, username, password, qr_code):
         """Logs user into their Robinhood account."""
-        
+
         super().__init__(username, password, qr_code)
 
     def calculate_VWAP(self, stock_history_df):
@@ -52,18 +52,15 @@ class TradeBotVWAP(TradeBot):
         :return: OrderType recommendation
         """
 
-        print(ticker)
-
-
         if not ticker:
             print("ERROR: ticker cannot be a null value")
             return None
 
         # Calculate the VWAP from the last day in 5 minute intervals.
-        stock_history_df = self.get_stock_history_dataframe(ticker, 
-                                                            interval="5minute",
-                                                            time_span="day")
-        
+        stock_history_df = self.get_stock_history_dataframe(
+            ticker, interval="5minute", time_span="day"
+        )
+
         vwap = self.calculate_VWAP(stock_history_df)
 
         # Get the current market price of the stock.

@@ -4,10 +4,9 @@ from src.trading_bots.base import OrderType, TradeBot
 
 
 class TradeBotSimpleMovingAverage(TradeBot):
-
     def __init__(self, username, password, qr_code):
         """Logs user into their Robinhood account."""
-        
+
         super().__init__(username, password, qr_code)
 
     def calculate_simple_moving_average(self, stock_history_df, number_of_days):
@@ -53,7 +52,6 @@ class TradeBotSimpleMovingAverage(TradeBot):
         :param ticker: A company's ticker symbol as a string=
         :return: OrderType recommendation
         """
-        print(ticker)
 
         if not ticker:
             print("ERROR: ticker cannot be a null value")
