@@ -8,6 +8,8 @@ from src.trading_bots.volume_weighted_average_price import TradeBotVWAP
 from src.trading_bots.twitter_sentiments import TradeBotTwitterSentiments
 from src.trading_bots.base import OrderType
 import time
+import random
+
 
 tickers = [
     "AAPL",
@@ -230,7 +232,7 @@ def main():
     current_cash = tb0.get_current_cash_position()
     print(f"Current cash position is ${current_cash}")
     if current_cash and current_cash > 1:
-        for ticker in tickers:
+        for ticker in random.shuffle(tickers):
             current_cash = tb0.get_current_cash_position()
             if current_cash and current_cash > 1:
                 try:
