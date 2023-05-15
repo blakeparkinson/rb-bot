@@ -232,7 +232,8 @@ def main():
     current_cash = tb0.get_current_cash_position()
     print(f"Current cash position is ${current_cash}")
     if current_cash and current_cash > 1:
-        for ticker in random.shuffle(tickers):
+        randomized_list = random.sample(tickers, len(tickers))
+        for ticker in randomized_list:
             current_cash = tb0.get_current_cash_position()
             if current_cash and current_cash > 1:
                 try:
