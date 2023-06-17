@@ -6,11 +6,11 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-TWITTER_CONSUMER_KEY = os.getenv('TWITTER_CONSUMER_KEY')
-TWITTER_CONSUMER_SECRET = os.getenv('TWITTER_CONSUMER_SECRET')
+TWITTER_CONSUMER_KEY = os.getenv("TWITTER_CONSUMER_KEY")
+TWITTER_CONSUMER_SECRET = os.getenv("TWITTER_CONSUMER_SECRET")
 
 
-ROBINHOOD_USER = os.getenv('ROBINHOOD_USER')
-ROBINHOOD_PASS = os.getenv('ROBINHOOD_PASS')
-QR_CODE = os.getenv('QR_CODE')
-
+ROBINHOOD_USER = os.getenv("ROBINHOOD_USER")
+ROBINHOOD_PASS = os.getenv("ROBINHOOD_PASS")
+ROBINHOOD_MFA_CODE = os.getenv("ROBINHOOD_MFA_CODE")
+QR_CODE = os.getenv("QR_CODE")

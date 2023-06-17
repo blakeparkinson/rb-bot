@@ -2,7 +2,7 @@ import sys
 
 from src.trading_bots.base import TradeBot
 from src.trading_bots.utilities import ROBINHOOD_PASS
-from src.trading_bots.utilities import ROBINHOOD_USER, QR_CODE
+from src.trading_bots.utilities import ROBINHOOD_USER, ROBINHOOD_MFA_CODE
 from src.trading_bots.simple_moving_average import TradeBotSimpleMovingAverage
 from src.trading_bots.volume_weighted_average_price import TradeBotVWAP
 from src.trading_bots.twitter_sentiments import TradeBotTwitterSentiments
@@ -198,36 +198,44 @@ tickers = [
 
 
 def main():
-    tb0 = TradeBot(ROBINHOOD_USER, ROBINHOOD_PASS, QR_CODE)
-    tb1 = TradeBotSimpleMovingAverage(ROBINHOOD_USER, ROBINHOOD_PASS, QR_CODE)
-    tb2 = TradeBotVWAP(ROBINHOOD_USER, ROBINHOOD_PASS, QR_CODE)
+    print(ROBINHOOD_USER)
+    print(ROBINHOOD_PASS)
+    print(ROBINHOOD_MFA_CODE)
+    tb0 = TradeBot(ROBINHOOD_USER, ROBINHOOD_PASS, ROBINHOOD_MFA_CODE)
+    tb1 = TradeBotSimpleMovingAverage(
+        ROBINHOOD_USER, ROBINHOOD_PASS, ROBINHOOD_MFA_CODE
+    )
+    tb2 = TradeBotVWAP(ROBINHOOD_USER, ROBINHOOD_PASS, ROBINHOOD_MFA_CODE)
     # tb3 = TradeBotTwitterSentiments(ROBINHOOD_USER, ROBINHOOD_PASS)
 
     current_positions = tb0.get_current_positions()
 
     keys = list(current_positions.keys())
     for key in keys:
-        current_price = tb0.get_current_market_price(key)
-        # take current price and compare to close price of the previous day, is 5% decrease than buy.
-        print(f"Current price of {key} is ${current_price}")
-        # history = tb0.get_stock_history_dataframe(key)
-        # print("History: ", history)
+        if float(current_positions[key]["equity"]) > 1:
+            current_price = tb0.get_current_market_price(key)
+            # take current price and compare to close price of the previous day, is 5% decrease than buy.
+            print(f"Current price of {key} is ${current_price}")
+            # history = tb0.get_stock_history_dataframe(key)
+            # print("History: ", history)
 
-        rec1 = tb1.make_order_recommendation(key)
-        print(f"order recommendation SMA 1 for ${key} ", rec1)
-        rec2 = tb2.make_order_recommendation(key)
-        print(f"order recommendation WMA 2 for ${key}: ", rec2)
+            rec1 = tb1.make_order_recommendation(key)
+            print(f"order recommendation SMA 1 for ${key} ", rec1)
+            rec2 = tb2.make_order_recommendation(key)
+            print(f"order recommendation WMA 2 for ${key}: ", rec2)
 
-        if rec2 == OrderType.SELL_RECOMMENDATION:
-            print(f"current position for ${key}:  {current_positions[key]}")
-            if float(current_positions[key]["equity"]) > 1:
-                try:
-                    tb0.place_sell_order(key, float(current_positions[key]["equity"]))
-                    print(f"Sold {key} at ${tb0.get_current_market_price(key)}")
-                except:
-                    continue
-        else:
-            print(f"Did not sell {key} at ${tb0.get_current_market_price(key)}")
+            if rec2 == OrderType.SELL_RECOMMENDATION:
+                print(f"current position for ${key}:  {current_positions[key]}")
+                if float(current_positions[key]["equity"]) > 1:
+                    try:
+                        tb0.place_sell_order(
+                            key, float(current_positions[key]["equity"])
+                        )
+                        print(f"Sold {key} at ${tb0.get_current_market_price(key)}")
+                    except:
+                        continue
+            else:
+                print(f"Did not sell {key} at ${tb0.get_current_market_price(key)}")
 
     current_cash = tb0.get_current_cash_position()
     print(f"Current cash position is ${current_cash}")
