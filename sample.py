@@ -12,6 +12,7 @@ import random
 
 
 tickers = [
+    "RIV",
     "AAPL",
     "MSFT",
     "AMZN",
@@ -74,7 +75,6 @@ tickers = [
     "COST",
     "SHOP",
     "BLK",
-    "BAJAJ-AUTO.NS",
     "BP",
     "AMAT",
     "TOT",
